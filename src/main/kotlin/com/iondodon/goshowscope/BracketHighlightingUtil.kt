@@ -7,13 +7,10 @@ import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.editor.markup.HighlighterLayer
 import com.intellij.openapi.editor.markup.HighlighterTargetArea
-import com.intellij.openapi.editor.markup.RangeHighlighter
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.refactoring.suggested.startOffset
-
-var currentHighlighters: MutableList<RangeHighlighter> = mutableListOf()
 
 fun findMatchingBracesRange(editor: Editor, caretOffset: Int): TextRange? {
     val project = editor.project ?: return null
@@ -41,33 +38,28 @@ fun highlightBraces(editor: Editor, range: TextRange) {
     val textAttributes = EditorColorsManager.getInstance().globalScheme.getAttributes(textAttributesKey)
 
     // Create highlighters for the opening and closing braces
-    val startHighlighter = markupModel.addRangeHighlighter(
+    markupModel.addRangeHighlighter(
         range.startOffset,
         range.startOffset + 1,
         HighlighterLayer.SELECTION,
         textAttributes,
         HighlighterTargetArea.EXACT_RANGE
     )
-    currentHighlighters.add(startHighlighter)
 
     // Highlight the closing brace
     if (!Character.isWhitespace(editor.document.charsSequence[range.endOffset])) {
-        val endHighlighter = markupModel.addRangeHighlighter(
+        markupModel.addRangeHighlighter(
             range.endOffset,
             range.endOffset + 1,
             HighlighterLayer.SELECTION,
             textAttributes,
             HighlighterTargetArea.EXACT_RANGE
         )
-        currentHighlighters.add(endHighlighter)
     }
 }
 
 fun clearBraceHighlights(editor: Editor) {
-    for (highlighter in currentHighlighters) {
-        editor.markupModel.removeHighlighter(highlighter)
-    }
-    currentHighlighters.clear()
+    editor.markupModel.removeAllHighlighters()
 }
 
 fun drawIndicator(editor: Editor, range: TextRange) {
@@ -76,13 +68,11 @@ fun drawIndicator(editor: Editor, range: TextRange) {
     val endOffset = range.endOffset
     val lineMarkerRenderer = BracketLineMarkerRenderer(startOffset, endOffset)
 
-    val rangeHighlighter = markupModel.addRangeHighlighter(
+    markupModel.addRangeHighlighter(
         startOffset,
         endOffset,
         HighlighterLayer.LAST + 1,
         null,
         HighlighterTargetArea.LINES_IN_RANGE
     ).apply { this.lineMarkerRenderer = lineMarkerRenderer }
-
-    currentHighlighters.add(rangeHighlighter)
 }

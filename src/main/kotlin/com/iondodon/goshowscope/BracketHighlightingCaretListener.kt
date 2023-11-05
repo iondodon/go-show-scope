@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.event.CaretEvent
 import com.intellij.openapi.editor.event.CaretListener
 
 
-class BraceHighlightingCaretListener(private val editor: Editor) : CaretListener {
+class BracketHighlightingCaretListener(private val editor: Editor) : CaretListener {
 
     override fun caretPositionChanged(event: CaretEvent) {
         val caret = event.caret ?: return

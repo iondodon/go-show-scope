@@ -74,7 +74,7 @@ fun drawLine(editor: Editor, range: TextRange) {
     val markupModel = editor.markupModel
     val startOffset = range.startOffset
     val endOffset = range.endOffset
-    val lineMarkerRenderer = BraceLineMarkerRenderer(startOffset, endOffset)
+    val lineMarkerRenderer = BracketLineMarkerRenderer(startOffset, endOffset)
 
     val rangeHighlighter = markupModel.addRangeHighlighter(
         startOffset,

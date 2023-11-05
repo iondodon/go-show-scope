@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.editor.event.DocumentListener
 import com.intellij.psi.PsiDocumentManager
 
-class BraceHighlightingDocumentListener(private val editor: Editor) : DocumentListener {
+class BracketHighlightingDocumentListener(private val editor: Editor) : DocumentListener {
     override fun documentChanged(event: DocumentEvent) {
         // Clear existing brace highlighters
         clearBraceHighlights(editor)

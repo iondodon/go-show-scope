@@ -12,6 +12,6 @@
     <depends>org.jetbrains.plugins.go</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <editorFactoryListener implementation="com.iondodon.goshowscope.BraceMatcherAppListener"/>
+        <editorFactoryListener implementation="com.iondodon.goshowscope.GoShowScopeAppListener"/>
     </extensions>
 </idea-plugin>

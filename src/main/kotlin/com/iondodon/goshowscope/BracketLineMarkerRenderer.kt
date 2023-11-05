@@ -8,7 +8,7 @@ import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.Rectangle
 
-class BraceLineMarkerRenderer(private val startOffset: Int, private var endOffset: Int) : LineMarkerRenderer {
+class BracketLineMarkerRenderer(private val startOffset: Int, private var endOffset: Int) : LineMarkerRenderer {
     override fun paint(editor: Editor, g: Graphics, r: Rectangle) {
         if (g is Graphics2D) {
             // Save the original stroke

@@ -16,7 +16,7 @@ class BracketHighlightingCaretListener(private val editor: Editor) : CaretListen
 
         if (matchingBracesRange != null) {
             highlightBraces(editor, matchingBracesRange)
-            drawLine(editor, matchingBracesRange)
+            drawIndicator(editor, matchingBracesRange)
         }
     }
 

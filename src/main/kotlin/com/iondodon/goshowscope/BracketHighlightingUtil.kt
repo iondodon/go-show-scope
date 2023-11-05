@@ -70,7 +70,7 @@ fun clearBraceHighlights(editor: Editor) {
     currentHighlighters.clear()
 }
 
-fun drawLine(editor: Editor, range: TextRange) {
+fun drawIndicator(editor: Editor, range: TextRange) {
     val markupModel = editor.markupModel
     val startOffset = range.startOffset
     val endOffset = range.endOffset
@@ -79,7 +79,7 @@ fun drawLine(editor: Editor, range: TextRange) {
     val rangeHighlighter = markupModel.addRangeHighlighter(
         startOffset,
         endOffset,
-        HighlighterLayer.CARET_ROW + 1,
+        HighlighterLayer.LAST + 1,
         null,
         HighlighterTargetArea.LINES_IN_RANGE
     ).apply { this.lineMarkerRenderer = lineMarkerRenderer }

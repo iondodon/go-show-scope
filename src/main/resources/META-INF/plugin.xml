@@ -1,0 +1,17 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.iondodon.goshowscope</id>
+    <name>GoShowScope</name>
+    <vendor email="iondodon2@gmail.com" url="https://github.com/iondodon">Ion Dodon</vendor>
+    <description><![CDATA[
+      This plugin highlights the code scope in the guter area.
+    ]]></description>
+    <version>1.0</version>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends>org.jetbrains.plugins.go</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <editorFactoryListener implementation="com.iondodon.goshowscope.BraceMatcherAppListener"/>
+    </extensions>
+</idea-plugin>
